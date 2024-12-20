@@ -1,5 +1,5 @@
 FROM ghcr.io/centos-workstation/achillobator:latest
-
+ARG IMAGE_NAME=personal
 RUN dnf install -y https://packages.microsoft.com/yumrepos/vscode/Packages/c/code-1.96.2-1734607808.el8.x86_64.rpm
 
 COPY build.sh /tmp/build.sh
