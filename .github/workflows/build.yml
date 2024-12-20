@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: "${{ github.event.repository.name }}"  # the name of the image produced by this build, matches repo names
+  IMAGE_NAME: "personal"  # the name of the image produced by this build, matches repo names
   IMAGE_DESC: "CentOS Stream-based images"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"
   DEFAULT_TAG: "latest"
@@ -114,7 +114,7 @@ jobs:
         shell: bash
         run: |
           just=$(which just)
-          sudo $just build "${env.IMAGE_NAME}" "${DEFAULT_TAG}"
+          sudo $just build "${IMAGE_NAME}" "${DEFAULT_TAG}"
 
       # Reprocess raw-img using rechunker which will delete it
       - name: Run Rechunker
@@ -137,7 +137,7 @@ jobs:
           IMAGE=$(podman pull ${{ steps.rechunk.outputs.ref }})
           sudo rm -rf ${{ steps.rechunk.outputs.output }}
           for tag in ${{ steps.generate-tags.outputs.alias_tags }}; do
-            podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
+            podman tag $IMAGE ${{ IMAGE_NAME }}:$tag
           done
 
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
@@ -179,7 +179,7 @@ jobs:
       - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${env.IMAGE_NAME}"
+          IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${IMAGE_NAME}"
           cosign sign -y --key env://COSIGN_PRIVATE_KEY ${IMAGE_FULL}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
