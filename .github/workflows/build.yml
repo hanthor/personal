@@ -114,7 +114,7 @@ jobs:
         shell: bash
         run: |
           just=$(which just)
-          sudo $just build "${IMAGE_NAME}" "${DEFAULT_TAG}"
+          sudo $just build "${env.IMAGE_NAME}" "${DEFAULT_TAG}"
 
       # Reprocess raw-img using rechunker which will delete it
       - name: Run Rechunker
@@ -179,7 +179,7 @@ jobs:
       - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${IMAGE_NAME}"
+          IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${env.IMAGE_NAME}"
           cosign sign -y --key env://COSIGN_PRIVATE_KEY ${IMAGE_FULL}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
