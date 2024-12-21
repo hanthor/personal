@@ -64,8 +64,8 @@ dnf install -y \
   cockpit-machines \
   cockpit-ostree \
   cockpit-podman \
-  qemu-img \
-  qemu-kvm \
-  libvirt \
-  libvirt-nss \
   systemd-container
+
+dnf group install -y --nobest "Virtualization Host"
+
+dnf remove -y subscription-manager 
