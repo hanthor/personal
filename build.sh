@@ -48,3 +48,32 @@ fi
 # Fix issues caused by ID no longer being rhel??? (FIXME: check if this is necessary)
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
+# Additions
+
+## Get latest VSCode RPM for x86_64 and install with dnf
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+dnf check-update
+dnf install -y code
+# Remove the VSCode repo and keys
+rm -f /etc/yum.repos.d/vscode.repo
+rpm --erase gpg-pubkey-$(rpm -q gpg-pubkey --qf "%{version}-%{release}\n" | grep microsoft | head -n 1)
+
+
+dnf install -y \
+  cockpit \
+  cockpit-storaged \
+  cockpit-bridge \
+  cockpit-ws \
+  cockpit-machines \
+  cockpit-ostree \
+  cockpit-podman \
+  cockpit-dashboard \
+  qemu-device-usb-redirect \
+  qemu-img \
+  qemu-system-x86-core \
+  qemu-user-binfmt \
+  qemu-user-static \
+  qemu-kvm \
+  libvirt \
+  libvirt-nss
