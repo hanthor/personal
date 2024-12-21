@@ -67,4 +67,5 @@ dnf install -y \
   qemu-img \
   qemu-kvm \
   libvirt \
-  libvirt-nss
+  libvirt-nss \
+  systemd-container
