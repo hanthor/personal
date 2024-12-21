@@ -11,7 +11,6 @@ ARG MAJOR_VERSION="${MAJOR_VERSION:-latest}"
 RUN ln -sf /run /var/run
 
 RUN \
-    --mount=type=bind,from=ctx,source=/,target=/ctx \
     mkdir -p /var/lib/alternatives && \
     /ctx/build.sh && \
     dnf clean all && \
