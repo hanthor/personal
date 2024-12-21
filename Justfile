@@ -1,5 +1,5 @@
 export repo_organization := env("GITHUB_REPOSITORY_OWNER", "centos-workstation")
-export image_name := env("IMAGE_NAME", "achillobator")
+export image_name := env("IMAGE_NAME", "personal")
 export centos_version := env("CENTOS_VERSION", "stream10")
 export default_tag := env("DEFAULT_TAG", "latest")
 
@@ -99,6 +99,7 @@ build $target_image=image_name $tag=default_tag:
     podman build \
         "${BUILD_ARGS[@]}" \
         "${LABELS[@]}" \
+        --pull=newer \
         --tag "${image_name}:${tag}" \
         .
 

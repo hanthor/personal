@@ -1,13 +1,23 @@
-FROM ghcr.io/centos-workstation/achillobator:latest
-ARG IMAGE_NAME=personal
-RUN dnf install -y https://packages.microsoft.com/yumrepos/vscode/Packages/c/code-1.96.2-1734607808.el8.x86_64.rpm
+ARG BASE_VERSION="${MAJOR_VERSION:-latest}"
+ARG BASE_IMAGE="ghcr.io/centos-workstation/achillobator"
+ARG CACHE_ID_SUFFIX="personal-latest"
 
-COPY build.sh /tmp/build.sh
+FROM scratch AS ctx
+COPY / /
 
-RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
+FROM ${BASE_IMAGE}:${BASE_VERSION}
+
+ARG IMAGE_NAME="${IMAGE_NAME:-personal}"
+ARG IMAGE_VENDOR="${IMAGE_VENDOR:-hanthor}"
+ARG MAJOR_VERSION="${MAJOR_VERSION:-latest}"
+
+RUN ln -sf /run /var/run
+
+RUN \
+    --mount=type=bind,from=ctx,source=/,target=/ctx \
+    mkdir -p /var/lib/alternatives && \
+    /ctx/build.sh && \
+    dnf clean all && \
     ostree container commit
-## NOTES:
-# - /var/lib/alternatives is required to prevent failure with some RPM installs
-# - All RUN commands must end with ostree container commit
-#   see: https://coreos.github.io/rpm-ostree/container/#using-ostree-container-commit
+
+RUN bootc container lint
