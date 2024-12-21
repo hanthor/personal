@@ -1,4 +1,4 @@
-# Beardy Achillobator
+# James' Achillobator
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/personal)](https://artifacthub.io/packages/search?repo=personal)
 [![build-ublue-custom](https://github.com/hanthor/personal/actions/workflows/build.yml/badge.svg)](https://github.com/hanthor/personal/actions/workflows/build.yml)
