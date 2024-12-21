@@ -64,12 +64,7 @@ dnf install -y \
   cockpit-machines \
   cockpit-ostree \
   cockpit-podman \
-  cockpit-dashboard \
-  qemu-device-usb-redirect \
   qemu-img \
-  qemu-system-x86-core \
-  qemu-user-binfmt \
-  qemu-user-static \
   qemu-kvm \
   libvirt \
   libvirt-nss
