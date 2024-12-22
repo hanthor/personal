@@ -59,7 +59,6 @@ dnf install -y $VSCODE_RPM_URL
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 dnf install -y docker-ce docker-ce-cli containerd.io
 systemctl enable docker
-dnf config-manager --disable docker-ce.repo
 
 dnf install -y \
   cockpit \
