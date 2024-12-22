@@ -180,11 +180,11 @@ jobs:
         if: github.event_name != 'pull_request'
         id: push_quay
         with:
-          registry: ${{ steps.registry_case.outputs.lowercase }}
+          registry: quay.io/${{ secrets.QUAY_USERNAME }}
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.generate-tags.outputs.alias_tags }}
           extra-args: |
-            --disable-content-trust
+        --disable-content-trust
 
       # This section is optional and only needs to be enabled in you plan on distributing
       # your project to others to consume. You will need to create a public and private key
@@ -202,5 +202,15 @@ jobs:
           cosign sign -y --key env://COSIGN_PRIVATE_KEY ${IMAGE_FULL}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
+          COSIGN_EXPERIMENTAL: false
+          COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+
+      - name: Sign quay.io container image
+        if: github.event_name != 'pull_request'
+        run: |
+          IMAGE_FULL="quay.io/${{ secrets.QUAY_USERNAME }}/${IMAGE_NAME}"
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${IMAGE_FULL}@${TAGS}
+        env:
+          TAGS: ${{ steps.push_quay.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
