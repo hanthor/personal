@@ -124,7 +124,7 @@ jobs:
           rechunk: 'ghcr.io/hhd-dev/rechunk:v1.0.1'
           ref: "localhost/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
           prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-          skip_compression: true
+          skip_compression: false
           version: ${{ env.CENTOS_VERSION }}
           labels: |
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
