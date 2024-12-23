@@ -98,48 +98,30 @@ packages=(
     cockpit-ostree 
     cockpit-podman 
     systemd-container
-    adw-gtk3-theme
-    bcache-tools
-    borgbackup
-    evtest
-    epson-inkjet-printer-escpr
-    epson-inkjet-printer-escpr2
     fish
     firewall-config
-    foo2zjs
-    fuse-encfs
     git-credential-libsecret
-    gum
     hplip
     krb5-workstation
     ifuse
-    input-leap
-    input-remapper
-    jetbrains-mono-fonts-all
     libimobiledevice
     libxcrypt-compat
     libsss_autofs
     lm_sensors
     mesa-libGLU
     oddjob-mkhomedir
-    opendyslexic-fonts
-    printer-driver-brlaser
     pulseaudio-utils
     python3-pip
-    rclone
-    restic
     samba-dcerpc
     samba-ldb-ldap-modules
     samba-winbind-clients
     samba-winbind-modules
     samba
     setools-console
-    solaar
     stress-ng
     tmux
     usbmuxd
     wireguard-tools
-    wl-clipboard
     zsh
 )
 
