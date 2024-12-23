@@ -55,6 +55,10 @@ VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linu
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
 dnf install -y $VSCODE_RPM_URL
 
+# Install docker from the official docker repo then enable and start the service, then disable and remove the repo
+dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+dnf install -y docker-ce docker-ce-cli containerd.io
+systemctl enable docker
 
 dnf install -y \
   cockpit \
