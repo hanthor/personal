@@ -136,6 +136,7 @@ systemctl enable libvirtd
 systemctl enable docker.socket
 systemctl enable podman.socket
 systemctl enable libvirt-dbus.service
+systemctl enable dx-groups.service
 
 
 # Remove subscription-manager
