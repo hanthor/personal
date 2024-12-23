@@ -48,28 +48,115 @@ fi
 # Fix issues caused by ID no longer being rhel??? (FIXME: check if this is necessary)
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
-# Additions
+# Update the package repository
+dnf update -y
 
-## Get latest VSCode RPM for x86_64 and install with dnf
+# Removals
+
+# Remove subscription-manager
+dnf remove -y subscription-manager 
+
+
+# Special Additions
+
+# VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
 dnf install -y $VSCODE_RPM_URL
 
-# Install docker from the official docker repo then enable and start the service, then disable and remove the repo
+# Docker: Install Docker
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 dnf install -y docker-ce docker-ce-cli containerd.io
-systemctl enable docker
 
-dnf install -y \
-  cockpit \
-  cockpit-storaged \
-  cockpit-bridge \
-  cockpit-ws \
-  cockpit-machines \
-  cockpit-ostree \
-  cockpit-podman \
-  systemd-container
 
 dnf group install -y --nobest "Virtualization Host"
 
+# Install the packages
+packages=(
+    adobe-source-code-pro-fonts
+    bcc
+    bpftrace
+    dbus-x11
+    flatpak-builder
+    firewall-config
+    google-droid-sans-mono-fonts
+    libvirt-nss
+    numactl
+    osbuild-selinux
+    powertop
+    sysprof
+    trace-cmd
+    udica
+    virt-manager
+    virt-v2v
+    virt-viewer
+    cockpit
+    cockpit-storaged 
+    cockpit-bridge 
+    cockpit-ws 
+    cockpit-machines 
+    cockpit-ostree 
+    cockpit-podman 
+    systemd-container
+    adw-gtk3-theme
+    bcache-tools
+    borgbackup
+    evtest
+    epson-inkjet-printer-escpr
+    epson-inkjet-printer-escpr2
+    fish
+    firewall-config
+    foo2zjs
+    fuse-encfs
+    git-credential-libsecret
+    gum
+    hplip
+    krb5-workstation
+    ifuse
+    input-leap
+    input-remapper
+    jetbrains-mono-fonts-all
+    libimobiledevice
+    libxcrypt-compat
+    libsss_autofs
+    lm_sensors
+    mesa-libGLU
+    oddjob-mkhomedir
+    opendyslexic-fonts
+    printer-driver-brlaser
+    pulseaudio-utils
+    python3-pip
+    rclone
+    restic
+    samba-dcerpc
+    samba-ldb-ldap-modules
+    samba-winbind-clients
+    samba-winbind-modules
+    samba
+    setools-console
+    solaar
+    stress-ng
+    tmux
+    usbmuxd
+    wireguard-tools
+    wl-clipboard
+    zsh
+)
+
+dnf install -y "${packages[@]}"
+
+
+dnf upgrade -y
+
+# Enable and start services for docekr, podman, libvrit, and cockpit
+systemctl enable cockpit.socket
+systemctl enable libvirtd
+systemctl enable docker.socket
+systemctl enable podman.socket
+systemctl enable libvirt-dbus.service
+
+
+# Remove subscription-manager
+
 dnf remove -y subscription-manager 
+
