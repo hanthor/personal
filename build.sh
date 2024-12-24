@@ -76,6 +76,9 @@ packages=(
     speech-dispatcher-espeak-ng.x86_64
     speech-dispatcher-utils.x86_64
     speech-dispatcher.x86_64
+    speech-dispatcher-espeak-ng.x86_64
+    speech-dispatcher-utils.x86_64
+    speech-dispatcher.x86_64
     adobe-source-code-pro-fonts
     bcc
     bpftrace
