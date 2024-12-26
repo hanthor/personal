@@ -73,6 +73,7 @@ dnf group install -y --nobest "Virtualization Host"
 
 # Install the packages
 packages=(
+    gnome-disk-utility.x86_64
     baobab.x86_64
     baobab.x86_64
     speech-dispatcher-espeak-ng.x86_64
