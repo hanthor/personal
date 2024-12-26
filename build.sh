@@ -59,6 +59,9 @@ dnf remove -y subscription-manager
 
 # Special Additions
 
+# ZFS
+dnf install -y https://zfsonlinux.org/epel/zfs-release-2-3$(rpm --eval "%{dist}").noarch.rpm
+
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
@@ -73,15 +76,11 @@ dnf group install -y --nobest "Virtualization Host"
 
 # Install the packages
 packages=(
-    gnome-disk-utility.x86_64
-    baobab.x86_64
-    baobab.x86_64
-    speech-dispatcher-espeak-ng.x86_64
-    speech-dispatcher-utils.x86_64
-    speech-dispatcher.x86_64
-    speech-dispatcher-espeak-ng.x86_64
-    speech-dispatcher-utils.x86_64
-    speech-dispatcher.x86_64
+    gnome-disk-utility
+    baobab
+    speech-dispatcher-espeak-ng
+    speech-dispatcher-utils
+    speech-dispatcher
     adobe-source-code-pro-fonts
     bcc
     bpftrace
