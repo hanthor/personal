@@ -61,6 +61,7 @@ dnf remove -y subscription-manager
 
 # ZFS
 dnf install -y https://zfsonlinux.org/epel/zfs-release-2-3$(rpm --eval "%{dist}").noarch.rpm
+dnf install -y https://kojipkgs.fedoraproject.org//packages/libvirt/10.6.0/5.fc41/x86_64/libvirt-daemon-driver-storage-zfs-10.6.0-5.fc41.x86_64.rpm
 
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
