@@ -48,107 +48,134 @@ fi
 # Fix issues caused by ID no longer being rhel??? (FIXME: check if this is necessary)
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
-# Update the package repository
-dnf update -y
+# Update the package repository and set mirror
+dnf update -y \
+--setopt=fastestmirror=True \
+--setopt=deltarpm=False \
+--setopt=tsflags=nodocs \
+--setopt=install_weak_deps=False \
+--setopt=group_package_types=mandatory,default,optional 
 
-# Removals
+# Try making DNF faster
+function dnf_install() {
+  dnf install -y \
+  --setopt=fastestmirror=True \
+  --setopt=max_parallel_downloads=10 \
+  --setopt=deltarpm=False \
+  --setopt=tsflags=nodocs \
+  --setopt=install_weak_deps=False \
+  --setopt=group_package_types=mandatory,default,optional \
+  "$@"
+}
+
+####################
+# Removals         #
+####################
 
 # Remove subscription-manager
-dnf remove -y subscription-manager 
+dnf remove -y \
+subscription-manager \
+gnome-extensions-app
 
+####################
+# Special Additions#
+####################
 
-# Special Additions
-
-# ZFS
-dnf install -y https://zfsonlinux.org/epel/zfs-release-2-3$(rpm --eval "%{dist}").noarch.rpm
-dnf install -y https://kojipkgs.fedoraproject.org//packages/libvirt/10.6.0/5.fc41/x86_64/libvirt-daemon-driver-storage-zfs-10.6.0-5.fc41.x86_64.rpm
+# ZFS: Install ZFS from the on-off built RPMs in /opt/zfs TODO: #2 Change to a proper repo once building for EL10
+dnf_install  -y $(ls /opt/zfs/*.rpm)
 
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
-dnf install -y $VSCODE_RPM_URL
+dnf_install  -y $VSCODE_RPM_URL
 
 # Docker: Install Docker
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-dnf install -y docker-ce docker-ce-cli containerd.io
+dnf_install -y docker-ce docker-ce-cli containerd.io
+dnf config-manager --set-disabled docker-ce-stable
 
 
-dnf group install -y --nobest "Virtualization Host"
+####################
+# Install Packages #
+####################
+
+#dnf group install -y "Virtualization Host"
 
 # Install the packages
 packages=(
-    gnome-disk-utility
-    baobab
-    speech-dispatcher-espeak-ng
-    speech-dispatcher-utils
-    speech-dispatcher
     adobe-source-code-pro-fonts
+    baobab
     bcc
     bpftrace
-    dbus-x11
-    flatpak-builder
-    firewall-config
-    google-droid-sans-mono-fonts
-    libvirt-nss
-    numactl
-    osbuild-selinux
-    powertop
-    sysprof
-    trace-cmd
-    udica
-    virt-manager
-    virt-v2v
-    virt-viewer
     cockpit
-    cockpit-storaged 
-    cockpit-bridge 
-    cockpit-ws 
-    cockpit-machines 
-    cockpit-ostree 
-    cockpit-podman 
-    systemd-container
-    fish
+    cockpit-bridge
+    cockpit-machines
+    cockpit-ostree
+    cockpit-podman
+    cockpit-storaged
+    cockpit-ws
+    dbus-x11
     firewall-config
+    fish
+    flatpak-builder
     git-credential-libsecret
+    gnome-disk-utility
+    google-droid-sans-mono-fonts
     hplip
-    krb5-workstation
     ifuse
+    krb5-workstation
     libimobiledevice
-    libxcrypt-compat
     libsss_autofs
+    libvirt-nss
+    libvirt-daemon
+    libxcrypt-compat
     lm_sensors
     mesa-libGLU
+    numactl
     oddjob-mkhomedir
+    osbuild-selinux
+    powertop
     pulseaudio-utils
     python3-pip
+    samba
     samba-dcerpc
     samba-ldb-ldap-modules
     samba-winbind-clients
     samba-winbind-modules
-    samba
     setools-console
+    speech-dispatcher
+    speech-dispatcher-espeak-ng
+    speech-dispatcher-utils
     stress-ng
+    sysprof
     tmux
+    trace-cmd
+    udica
     usbmuxd
+    virt-manager
+    virt-v2v
+    virt-viewer
     wireguard-tools
     zsh
 )
 
-dnf install -y "${packages[@]}"
+dnf_install -y "${packages[@]}"
 
 
 dnf upgrade -y
 
-# Enable and start services for docekr, podman, libvrit, and cockpit
+# cleanup
+dnf remove -y subscription-manager 
+dnf clean all
+
+# remove all older versions of the kernel, except the current one
+dnf remove -y $(dnf repoquery --installonly --latest-limit=-1 -q)
+
+# Enable and start services for docker, podman, libvrit, and cockpit
 systemctl enable cockpit.socket
 systemctl enable libvirtd
 systemctl enable docker.socket
 systemctl enable podman.socket
 systemctl enable libvirt-dbus.service
 systemctl enable dx-groups.service
-
-
-# Remove subscription-manager
-
-dnf remove -y subscription-manager 
 
