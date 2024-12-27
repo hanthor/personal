@@ -2,7 +2,6 @@
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/personal)](https://artifacthub.io/packages/search?repo=personal)
 [![build-ublue-custom](https://github.com/hanthor/personal/actions/workflows/build.yml/badge.svg)](https://github.com/hanthor/personal/actions/workflows/build.yml)
-[![CodeQL](https://github.com/hanthor/personal/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/hanthor/personal/actions/workflows/codeql-analysis.yml)
 [![quay.io](https://quay.io/repository/jreilly112/personal/status "quay.io")](https://quay.io/repository/jreilly112/personal)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/hanthor/personal/badge)](https://api.securityscorecards.dev/projects/github.com/hanthor/personal)
 
