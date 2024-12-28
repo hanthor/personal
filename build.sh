@@ -60,11 +60,6 @@ dnf update -y \
 function dnf_install() {
   dnf install -y \
   --setopt=fastestmirror=True \
-  --setopt=max_parallel_downloads=10 \
-  --setopt=deltarpm=False \
-  --setopt=tsflags=nodocs \
-  --setopt=install_weak_deps=False \
-  --setopt=group_package_types=mandatory,default,optional \
   "$@"
 }
 
@@ -80,9 +75,6 @@ gnome-extensions-app
 ####################
 # Special Additions#
 ####################
-
-# ZFS: Install ZFS from the on-off built RPMs in /opt/zfs TODO: #2 Change to a proper repo once building for EL10
-dnf_install  -y $(ls /opt/zfs/*.rpm)
 
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
@@ -130,7 +122,7 @@ packages=(
     libvirt-daemon
     libxcrypt-compat
     lm_sensors
-    mesa-libGLU
+    mesa
     numactl
     oddjob-mkhomedir
     osbuild-selinux
