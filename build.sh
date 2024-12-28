@@ -49,12 +49,7 @@ fi
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
 # Update the package repository and set mirror
-dnf update -y \
---setopt=fastestmirror=True \
---setopt=deltarpm=False \
---setopt=tsflags=nodocs \
---setopt=install_weak_deps=False \
---setopt=group_package_types=mandatory,default,optional 
+dnf update -y --refresh
 
 # Try making DNF faster
 function dnf_install() {
