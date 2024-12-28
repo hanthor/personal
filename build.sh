@@ -117,7 +117,7 @@ packages=(
     libvirt-daemon
     libxcrypt-compat
     lm_sensors
-    mesa
+    mesa-libGLU
     numactl
     oddjob-mkhomedir
     osbuild-selinux
