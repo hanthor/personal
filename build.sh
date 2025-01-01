@@ -81,6 +81,10 @@ dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce
 dnf_install -y docker-ce docker-ce-cli containerd.io
 dnf config-manager --set-disabled docker-ce-stable
 
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:ublue-os:staging install \
+  ghostty 
+
+
 
 ####################
 # Install Packages #
