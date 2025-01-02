@@ -117,8 +117,10 @@ packages=(
     krb5-workstation
     libimobiledevice
     libsss_autofs
+    libvirt
     libvirt-nss
     libvirt-daemon
+    libvirt-daemon-config-nwfilter
     libxcrypt-compat
     lm_sensors
     mesa-libGLU
@@ -149,7 +151,8 @@ packages=(
     wireguard-tools
     zsh
     ntfs-3g
-)
+    libvirt-client-qemu
+    )
 
 dnf_install -y "${packages[@]}"
 
