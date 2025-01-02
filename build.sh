@@ -81,8 +81,6 @@ dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce
 dnf_install -y docker-ce docker-ce-cli containerd.io
 dnf config-manager --set-disabled docker-ce-stable
 
-dnf -y --enablerepo copr:copr.fedorainfracloud.org:ublue-os:staging install \
-  ghostty 
 
 
 
@@ -169,5 +167,4 @@ systemctl enable libvirtd
 systemctl enable docker.socket
 systemctl enable podman.socket
 systemctl enable libvirt-dbus.service
-systemctl enable dx-groups.service
 
