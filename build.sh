@@ -145,7 +145,6 @@ packages=(
     trace-cmd
     udica
     usbmuxd
-    virt-manager
     virt-v2v
     virt-viewer
     wireguard-tools
