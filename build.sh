@@ -71,6 +71,8 @@ gnome-extensions-app
 # Special Additions#
 ####################
 
+ dnf copr enable -y areiter/fedora-epel-10-extra 
+
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
