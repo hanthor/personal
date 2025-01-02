@@ -148,6 +148,7 @@ packages=(
     virt-viewer
     wireguard-tools
     zsh
+    ntfs-3g
 )
 
 dnf_install -y "${packages[@]}"
