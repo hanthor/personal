@@ -1,8 +1,4 @@
-ARG BASE_VERSION="${MAJOR_VERSION:-latest}"
-ARG BASE_IMAGE="ghcr.io/centos-workstation/achillobator"
-ARG CACHE_ID_SUFFIX="personal-latest"
-
-FROM ${BASE_IMAGE}:${BASE_VERSION}
+FROM ghcr.io/centos-workstation/achillobator:latest
 COPY system_files /
 ARG IMAGE_NAME="${IMAGE_NAME:-personal}"
 ARG IMAGE_VENDOR="${IMAGE_VENDOR:-hanthor}"
