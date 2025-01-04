@@ -72,6 +72,8 @@ gnome-extensions-app
 ####################
 
  dnf copr enable -y areiter/fedora-epel-10-extra 
+ dnf -y copr enable gmaglione/podman-bootc
+
 
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
@@ -127,6 +129,7 @@ packages=(
     numactl
     oddjob-mkhomedir
     osbuild-selinux
+    podman-bootc
     powertop
     pulseaudio-utils
     python3-pip
