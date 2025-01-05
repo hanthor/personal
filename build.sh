@@ -96,65 +96,65 @@ dnf config-manager --set-disabled docker-ce-stable
 
 # Install the packages
 packages=(
-    adobe-source-code-pro-fonts
-    baobab
-    bcc
-    bpftrace
-    cockpit
-    cockpit-bridge
-    cockpit-machines
-    cockpit-ostree
-    cockpit-podman
-    cockpit-storaged
-    cockpit-ws
-    dbus-x11
-    firewall-config
-    fish
-    flatpak-builder
-    git-credential-libsecret
-    gnome-disk-utility
-    google-droid-sans-mono-fonts
-    hplip
-    ifuse
-    krb5-workstation
-    libimobiledevice
-    libsss_autofs
-    libvirt
-    libvirt-nss
-    libvirt-daemon
-    libvirt-daemon-config-nwfilter
-    libxcrypt-compat
-    lm_sensors
-    mesa-libGLU
-    numactl
-    oddjob-mkhomedir
-    osbuild-selinux
-    podman-bootc
-    powertop
-    pulseaudio-utils
-    python3-pip
-    samba
-    samba-dcerpc
-    samba-ldb-ldap-modules
-    samba-winbind-clients
-    samba-winbind-modules
-    setools-console
-    speech-dispatcher
-    speech-dispatcher-espeak-ng
-    speech-dispatcher-utils
-    stress-ng
-    sysprof
-    tmux
-    trace-cmd
-    udica
-    usbmuxd
-    virt-v2v
-    virt-viewer
-    wireguard-tools
-    zsh
-    ntfs-3g
-    libvirt-client-qemu
-    )
+  adobe-source-code-pro-fonts
+  baobab
+  bcc
+  bpftrace
+  cockpit
+  cockpit-bridge
+  cockpit-machines
+  cockpit-ostree
+  cockpit-podman
+  cockpit-storaged
+  cockpit-ws
+  dbus-x11
+  firewall-config
+  fish
+  flatpak-builder
+  git-credential-libsecret
+  gnome-disk-utility
+  google-droid-sans-mono-fonts
+  hplip
+  ifuse
+  krb5-workstation
+  libimobiledevice
+  libsss_autofs
+  libvirt
+  libvirt-client-qemu
+  libvirt-daemon
+  libvirt-daemon-config-nwfilter
+  libvirt-nss
+  libxcrypt-compat
+  lm_sensors
+  mesa-libGLU
+  numactl
+  ntfs-3g
+  oddjob-mkhomedir
+  osbuild-selinux
+  podman-bootc
+  powertop
+  pulseaudio-utils
+  python3-pip
+  samba
+  samba-dcerpc
+  samba-ldb-ldap-modules
+  samba-winbind-clients
+  samba-winbind-modules
+  setools-console
+  speech-dispatcher
+  speech-dispatcher-espeak-ng
+  speech-dispatcher-utils
+  stress-ng
+  sysprof
+  tmux
+  trace-cmd
+  udica
+  usbmuxd
+  virt-v2v
+  virt-viewer
+  wireguard-tools
+  zsh
+)
 
 dnf_install -y "${packages[@]}"
 
@@ -174,4 +174,5 @@ systemctl enable libvirtd
 systemctl enable docker.socket
 systemctl enable podman.socket
 systemctl enable libvirt-dbus.service
+systemctl
 
