@@ -85,7 +85,14 @@ dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce
 dnf_install -y docker-ce docker-ce-cli containerd.io
 dnf config-manager --set-disabled docker-ce-stable
 
-
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:ublue-os:staging install \
+  -x bluefin-logos \
+  fzf \
+  glow \
+  gnome-shell-extension-logo-menu \
+  gum \
+  jetbrains-mono-fonts-all \
+  wl-clipboard \
 
 
 ####################
