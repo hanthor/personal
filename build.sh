@@ -55,6 +55,7 @@ dnf update -y --refresh
 function dnf_install() {
   dnf install -y \
   --setopt=fastestmirror=True \
+  --setopt=install_weak_deps=False  \
   "$@"
 }
 
@@ -111,6 +112,8 @@ packages=(
   git-credential-libsecret
   gnome-disk-utility
   google-droid-sans-mono-fonts
+  google-noto-*
+  golang
   hplip
   ifuse
   krb5-workstation
@@ -120,6 +123,7 @@ packages=(
   libvirt-client-qemu
   libvirt-daemon
   libvirt-daemon-config-nwfilter
+  libevirt-devel
   libvirt-nss
   libxcrypt-compat
   lm_sensors
@@ -151,6 +155,7 @@ packages=(
   virt-viewer
   wireguard-tools
   zsh
+  xorrison
 )
 
 dnf_install -y "${packages[@]}"
@@ -171,5 +176,4 @@ systemctl enable libvirtd
 systemctl enable docker.socket
 systemctl enable podman.socket
 systemctl enable libvirt-dbus.service
-systemctl
 
