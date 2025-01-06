@@ -121,16 +121,14 @@ packages=(
   libvirt-client-qemu
   libvirt-daemon
   libvirt-daemon-config-nwfilter
-  libevirt-devel
+  libvirt-devel
   libvirt-nss
   libxcrypt-compat
   lm_sensors
   mesa-libGLU
   numactl
-  ntfs-3g
   oddjob-mkhomedir
   osbuild-selinux
-  podman-bootc
   powertop
   pulseaudio-utils
   python3-pip
@@ -153,7 +151,7 @@ packages=(
   virt-viewer
   wireguard-tools
   zsh
-  xorrison
+  
 )
 
 dnf_install -y "${packages[@]}"
