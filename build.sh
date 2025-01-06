@@ -72,8 +72,6 @@ gnome-extensions-app
 # Special Additions#
 ####################
 
-dnf config-manager --add-repo "https://copr.fedorainfracloud.org/coprs/gmaglione/podman-bootc/repo/centos-stream-${MAJOR_VERSION}/gmaglione-podman-bootc-centos-stream-${MAJOR_VERSION}.repo"
-
 
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
