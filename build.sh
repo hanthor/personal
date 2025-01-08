@@ -149,6 +149,7 @@ packages=(
   usbmuxd
   virt-v2v
   virt-viewer
+  wev
   wireguard-tools
   zsh
   
