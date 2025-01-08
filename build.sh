@@ -138,7 +138,6 @@ packages=(
   samba-winbind-clients
   samba-winbind-modules
   setools-console
-  showkey
   speech-dispatcher
   speech-dispatcher-espeak-ng
   speech-dispatcher-utils
@@ -150,7 +149,6 @@ packages=(
   usbmuxd
   virt-v2v
   virt-viewer
-  wev
   wireguard-tools
   zsh
   
