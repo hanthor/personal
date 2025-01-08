@@ -138,6 +138,7 @@ packages=(
   samba-winbind-clients
   samba-winbind-modules
   setools-console
+  showkey
   speech-dispatcher
   speech-dispatcher-espeak-ng
   speech-dispatcher-utils
