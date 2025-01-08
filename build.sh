@@ -49,7 +49,7 @@ fi
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
 # Update the package repository and set mirror
-dnf update -y --refresh
+# dnf update -y --refresh #diabled dies to microcode_ctl causing failures
 
 # Try making DNF faster
 function dnf_install() {
