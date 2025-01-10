@@ -1,11 +1,11 @@
 #!/bin/bash
 
 set -ouex pipefail
-
+DATE=$(date +%Y%m%d)
 # Image Info
 OLD_PRETTY_NAME=$(bash -c 'source /usr/lib/os-release ; echo $NAME $VERSION')
 MAJOR_VERSION=$(bash -c 'source /usr/lib/os-release ; echo $VERSION_ID')
-IMAGE_PRETTY_NAME="James' Personal OS"
+IMAGE_PRETTY_NAME="James' Personal OS ${DATE}"
 IMAGE_LIKE="rhel fedora"
 HOME_URL="https://projectbluefin.io"
 DOCUMENTATION_URL="https://docs.projectbluefin.io"
