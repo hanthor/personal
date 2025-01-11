@@ -96,6 +96,7 @@ packages=(
   baobab
   bcc
   bpftrace
+  chromium
   cockpit
   cockpit-bridge
   cockpit-machines
