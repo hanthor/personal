@@ -96,7 +96,7 @@ build $target_image=image_name $tag=default_tag:
     LABELS+=("--label" "io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/120078124?s=200&v=4")
     LABELS+=("--label" "org.opencontainers.image.description=CentOS based images")
 
-    podman build \
+    sudo podman build \
         "${BUILD_ARGS[@]}" \
         "${LABELS[@]}" \
         --pull=newer \
@@ -130,7 +130,7 @@ _rootful_load_image $target_image=image_name $tag=default_tag:
         just sudoif podman pull "${target_image}:${tag}"
     fi
 
-_build-bib $target_image $tag $type $config: (_rootful_load_image target_image tag)
+_build-bib $target_image $tag $type $config:
     #!/usr/bin/env bash
     set -euo pipefail
 
