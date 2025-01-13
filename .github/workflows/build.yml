@@ -30,13 +30,14 @@ concurrency:
 jobs:
   build_push:
     name: Build and push image
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
+    # runs-on: ubuntu-24.04
 
     permissions:
       contents: read
       packages: write
       id-token: write
-
+  
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
