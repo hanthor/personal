@@ -75,7 +75,7 @@ gnome-extensions-app
 
 # https://copr.fedorainfracloud.org/coprs/yalter/niri-git/repo/centos-stream-10/yalter-niri-git-centos-stream-10.repo
 dnf config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/yalter/niri-git/repo/epel-10/yalter-niri-git-epel-10.repo
-dnf -y install \
+dnf_install \
   niri
 
 
