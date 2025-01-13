@@ -51,11 +51,6 @@ jobs:
         run: |
           just check
 
-      - name: Maximize build space
-        uses: ublue-os/remove-unwanted-software@v7
-        with:
-          remove-codeql: true
-
       - name: Generate tags
         id: generate-tags
         shell: bash
