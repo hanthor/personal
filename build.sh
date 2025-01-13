@@ -83,7 +83,8 @@ dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce
 dnf_install -y docker-ce docker-ce-cli containerd.io
 dnf config-manager --set-disabled docker-ce-stable
 
-
+dnf_install https://download.copr.fedorainfracloud.org/results/xanderlent/intel-npu-driver/fedora-41-x86_64/08462352-intel-npu-level-zero/intel-npu-firmware-1.10.1-1.fc41.noarch.rpm
+dnf_install https://download.copr.fedorainfracloud.org/results/xanderlent/intel-npu-driver/fedora-41-x86_64/08462352-intel-npu-level-zero/intel-npu-level-zero-1.10.1-1.fc41.x86_64.rpm
 ####################
 # Install Packages #
 ####################
