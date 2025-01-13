@@ -73,6 +73,12 @@ gnome-extensions-app
 ####################
 
 
+# https://copr.fedorainfracloud.org/coprs/yalter/niri-git/repo/centos-stream-10/yalter-niri-git-centos-stream-10.repo
+dnf config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/yalter/niri-git/repo/epel-10/yalter-niri-git-epel-10.repo
+dnf -y install \
+  niri
+
+
 # VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
 VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
 VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
