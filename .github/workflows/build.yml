@@ -214,7 +214,3 @@ jobs:
           TAGS: ${{ steps.push_quay.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
-      - name: Attest Build Provenance
-        uses: actions/attest-build-provenance@v2.1.0
-        if: github.event_name != 'pull_request'        
-      
