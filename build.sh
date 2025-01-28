@@ -73,16 +73,20 @@ gnome-extensions-app
 ####################
 
 
-# VSCODE: Get latest VSCode RPM for x86_64 and install with dnf
-VSCODE_REPO_URL="https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64"
-VSCODE_RPM_URL=$(curl -sI $VSCODE_REPO_URL | grep -i location | awk '{print $2}' | tr -d '\r')
-dnf_install  -y $VSCODE_RPM_URL
+tee > /tmp/oneAPI.repo << EOF
+[oneAPI]
+name=Intel® oneAPI repository
+baseurl=https://yum.repos.intel.com/oneapi
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+EOF
 
-# Docker: Install Docker
-dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-dnf_install -y docker-ce docker-ce-cli containerd.io
-dnf config-manager --set-disabled docker-ce-stable
+mv /tmp/oneAPI.repo /etc/yum.repos.d
 
+# Install the Intel oneAPI toolkit
+dnf install intel-oneapi-base-toolkit intel-oneapi*
 
 ####################
 # Install Packages #
@@ -91,85 +95,24 @@ dnf config-manager --set-disabled docker-ce-stable
 #dnf group install -y "Virtualization Host"
 
 # Install the packages
-packages=(
-  adobe-source-code-pro-fonts
-  baobab
-  bcc
-  bpftrace
-  cockpit
-  cockpit-bridge
-  cockpit-machines
-  cockpit-ostree
-  cockpit-podman
-  cockpit-storaged
-  cockpit-ws
-  dbus-x11
-  firewall-config
-  fish
-  flatpak-builder
-  git-credential-libsecret
-  gnome-disk-utility
-  google-droid-sans-mono-fonts
-  google-noto-*
-  golang
-  hplip
-  ifuse
-  krb5-workstation
-  libimobiledevice
-  libsss_autofs
-  libvirt
-  libvirt-client-qemu
-  libvirt-daemon
-  libvirt-daemon-config-nwfilter
-  libvirt-devel
-  libvirt-nss
-  libxcrypt-compat
-  lm_sensors
-  mesa-libGLU
-  numactl
-  oddjob-mkhomedir
-  osbuild-selinux
-  powertop
-  pulseaudio-utils
-  python3-pip
-  samba
-  samba-dcerpc
-  samba-ldb-ldap-modules
-  samba-winbind-clients
-  samba-winbind-modules
-  setools-console
-  speech-dispatcher
-  speech-dispatcher-espeak-ng
-  speech-dispatcher-utils
-  stress-ng
-  sysprof
-  tmux
-  trace-cmd
-  udica
-  usbmuxd
-  virt-v2v
-  virt-viewer
-  wireguard-tools
-  zsh
-  
-)
+#packages=()
 
-dnf_install -y "${packages[@]}"
+# dnf_install -y "${packages[@]}"
 
 
-dnf upgrade -y
+# dnf upgrade -y
 
-# cleanup
-dnf remove -y subscription-manager 
-dnf clean all
+# # cleanup
+# dnf remove -y subscription-manager 
+# dnf clean all
 
-# remove all older versions of the kernel, except the current one
-dnf remove -y $(dnf repoquery --installonly --latest-limit=-1 -q)
+# # remove all older versions of the kernel, except the current one
+# dnf remove -y $(dnf repoquery --installonly --latest-limit=-1 -q)
 
-# Enable and start services for docker, podman, libvrit, and cockpit
-systemctl enable cockpit.socket
-systemctl enable libvirtd
-systemctl enable docker.socket
-systemctl enable podman.socket
-systemctl enable libvirt-dbus.service
+# # Enable and start services for docker, podman, libvrit, and cockpit
+# systemctl enable cockpit.socket
+# systemctl enable libvirtd
+# systemctl enable docker.socket
+# systemctl enable podman.socket
+# systemctl enable libvirt-dbus.service
 
