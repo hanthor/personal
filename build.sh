@@ -63,6 +63,11 @@ function dnf_install() {
 # Removals         #
 ####################
 
+# Remove subscription-manager
+dnf remove -y \
+subscription-manager \
+gnome-extensions-app
+
 ####################
 # Special Additions#
 ####################
