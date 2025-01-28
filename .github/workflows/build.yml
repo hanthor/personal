@@ -36,11 +36,16 @@ jobs:
       contents: read
       packages: write
       id-token: write
-
+  
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
         uses: actions/checkout@v4
+      
+      - name: Maximize build space
+        uses: ublue-os/remove-unwanted-software@v8
+        with:
+          remove-codeql: true
 
       - name: Setup Just
         uses: extractions/setup-just@v2
@@ -49,11 +54,6 @@ jobs:
         shell: bash
         run: |
           just check
-
-      - name: Maximize build space
-        uses: ublue-os/remove-unwanted-software@v7
-        with:
-          remove-codeql: true
 
       - name: Generate tags
         id: generate-tags
@@ -119,7 +119,7 @@ jobs:
       # Reprocess raw-img using rechunker which will delete it
       - name: Run Rechunker
         id: rechunk
-        uses: hhd-dev/rechunk@v1.1.1
+        uses: hhd-dev/rechunk@v1.1.2
         with:
           rechunk: 'ghcr.io/hhd-dev/rechunk:v1.0.1'
           ref: "localhost/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
