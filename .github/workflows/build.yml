@@ -48,7 +48,7 @@ jobs:
           remove-codeql: true
 
       - name: Setup Just
-        uses: extractions/setup-just@v2
+        uses: extractions/setup-just@v3
 
       - name: Check Just Syntax
         shell: bash
